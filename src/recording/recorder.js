@@ -2,14 +2,15 @@ const fs = require('fs');
 const arrayBufferToAudioBuffer = require('arraybuffer-to-audiobuffer');
 const audioBufferToWav = require('audiobuffer-to-wav');
 const socket = require('./socket.js');
+let mediaRecorder;
 
 const recorder = {
-    rec: () => {
+    start: () => {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.log('getUserMedia supported.');
         navigator.mediaDevices.getUserMedia({audio: true})
         .then((stream) => {
-          const mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder = new MediaRecorder(stream);
           mediaRecorder.start();
           const audioChunks = [];
 
@@ -31,15 +32,17 @@ const recorder = {
               arrayBufferToAudioBuffer(arrayBuffer)
               .then((audioBuffer) => {
                 wav = audioBufferToWav(audioBuffer);
-                socket.sendAudio(wav);
+                socket.sendAudio(wav, (response) => {
+                  return response
+                });
               })
             };
             fileReader.readAsArrayBuffer(blob);
           });
 
-          setTimeout(() => {
+          /*setTimeout(() => {
             mediaRecorder.stop();
-          }, 3000);
+          }, 3000);*/
         })
         .catch((err) => {
           console.log('The following getUserMedia error occured: ' + err);
@@ -48,7 +51,17 @@ const recorder = {
         console.log('getUserMedia not supported on your browser!');
       }
       return 'Media Rec init OK'
+    },
+    stop : () => {
+      if(mediaRecorder != undefined){
+        mediaRecorder.stop();
+      }
+    },
+    external : () => {
+      socket.triggerExternalAudio();
     }
+
+
   }
 
 export {recorder};

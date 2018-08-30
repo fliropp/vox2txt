@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import {recorder} from './recording/recorder.js';
+import RecordPanel from './components/RecordPanel.js';
+import ResultPanel from './components/ResultPanel.js';
+import RecordingFromServer from './components/RecordingFromServer.js';
+import { Provider } from 'react-redux';
+import store from './reducers/v2tStore.js';
 import './App.css';
 
 class App extends Component {
@@ -8,38 +12,19 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Provider store={store}>
+        <div>
         <div className="App">
           {this.state.status}
         </div>
-        <Vox2Txt/>
-      </div>
+        <RecordPanel/>
+        <ResultPanel state={this.props}/>
+        //<RecordingFromServer/>
+        </div>
+      </Provider>
     );
   }
 }
 
-class Vox2Txt extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className='record'>{recorder.rec()}</div>
-        <div className='stop'/>
-        <div className='source-clips'/>
-      </div>
-    );
-  }
-}
-
-class RecordStop extends React.Component {
-  render() {
-    return (
-        <button style={buttonStyle}>stop</button>
-    );
-  }
-}
-
-const buttonStyle = {
-  margin: '10px 10px 10px 0'
-};
 
 export default App;

@@ -18,7 +18,7 @@ module.exports = {
         content: input,
       };
       const config = {
-        encoding: 'LINEAR',
+        encoding: 'WAV',
         sampleRateHertz: 44100,
         languageCode: 'en-US',
       };
