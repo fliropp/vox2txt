@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {recorder} from '../recording/recorder.js';
 import * as actions from '../actions/txtAction.js';
 import v2taudio from '../recording/socket.js';
 import {connect} from 'react-redux';
@@ -17,27 +16,23 @@ class RecordPanel extends Component {
     return (
       <div>
         <div className="RecordPanel">
-          RECORDING PANEL
+          RECORDING PANEL status: {this.props.transcripts.status}
         </div>
         <div>
-          <RecordStart/>
-          <RecordStop/>
+          <RecordStart state={this.props}/>
+          <RecordStop state={this.props}/>
         </div>
       </div>
     );
   }
 }
 
-const stopRecording = () => {
-  recorder.stop((result) => {
-    this.props.updateTxt(result);
-  })
-}
 
 class RecordStart extends React.Component {
+
   render() {
     return (
-        <button style={buttonStyle} onClick={recorder.start}>record</button>
+        <button style={buttonStyle} onClick={this.props.state.startRecording}>record</button>
     );
   }
 }
@@ -45,7 +40,7 @@ class RecordStart extends React.Component {
 class RecordStop extends React.Component {
   render() {
     return (
-        <button style={buttonStyle} onClick={stopRecording}>stop</button>
+        <button style={buttonStyle} onClick={this.props.state.getAudioTranscript}>stop</button>
     );
   }
 }
@@ -60,6 +55,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateTxt: (txt) => { dispatch(actions.updateTxt(txt)) },
+  startRecording: () => {dispatch(actions.startRecording())},
+  getAudioTranscript: () => { dispatch(actions.getAudioTranscript())}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordPanel);

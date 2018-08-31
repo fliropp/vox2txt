@@ -17,7 +17,7 @@ class App extends Component {
         <div className="App">
           {this.state.status}
         </div>
-        <RecordPanel/>
+        <RecordPanel state={this.props}/>
         <ResultPanel state={this.props}/>
         //<RecordingFromServer/>
         </div>

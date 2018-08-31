@@ -2,6 +2,8 @@ const fs = require('fs');
 const arrayBufferToAudioBuffer = require('arraybuffer-to-audiobuffer');
 const audioBufferToWav = require('audiobuffer-to-wav');
 const socket = require('./socket.js');
+
+const audioReadyEvent = new CustomEvent('transcriptReady');
 let mediaRecorder;
 
 const recorder = {
@@ -26,14 +28,17 @@ const recorder = {
             let fileReader = new FileReader();
             let arrayBuffer;
             let wav;
+            let repsonse = "";
 
             fileReader.onloadend = (e) => {
               arrayBuffer = e.target.result;
               arrayBufferToAudioBuffer(arrayBuffer)
               .then((audioBuffer) => {
                 wav = audioBufferToWav(audioBuffer);
-                socket.sendAudio(wav, (response) => {
-                  return response
+                socket.sendAudio(wav, (res) => {
+                  audioReadyEvent.data = res;
+                  window.dispatchEvent(audioReadyEvent);
+                  return res;
                 });
               })
             };
@@ -53,9 +58,16 @@ const recorder = {
       return 'Media Rec init OK'
     },
     stop : () => {
-      if(mediaRecorder != undefined){
-        mediaRecorder.stop();
-      }
+      return new Promise ((resolve, reject) => {
+        if (mediaRecorder != undefined && mediaRecorder.state !== 'inactive'){
+          mediaRecorder.stop();
+          window.addEventListener('transcriptReady', (trscpt) => {
+            resolve(trscpt.data);
+          });
+        } else {
+          reject('no tro lo lo lo fo yo');
+        }
+      });
     },
     external : () => {
       socket.triggerExternalAudio();

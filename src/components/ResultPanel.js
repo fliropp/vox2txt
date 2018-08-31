@@ -13,9 +13,9 @@ class ResultPanel extends Component {
   }
 
   componentDidMount() {
-    this.props.updateTxt({transcript_part: '...linje1'});
-    this.props.updateTxt({transcript_part: '...linje2'});
-    this.props.updateTxt({transcript_part: '...linje3'});
+    this.props.updateTxt('...linje1');
+    this.props.updateTxt('...linje2');
+    this.props.updateTxt('...linje3');
   }
 
   render() {
