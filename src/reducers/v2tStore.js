@@ -6,18 +6,31 @@ const getInitState = () => {
   return {
     transcript:[],
     error_msg:'',
-    status: 'IDLE'
+    status: 'READY',
+    active_transcript: 0,
   }
 }
 
 const v2tStore = (state = getInitState(), action) => {
   switch (action.type) {
-    case actions.UPDATE_TXT:
+    case actions.CREATE_TRANSCRIPT:
       return {...state, transcript: [...state.transcript, {transcript_part: action.txt}]};
+    case actions.UPDATE_TRANSCRIPT:
+        return {
+          ...state, transcript: state.transcript.map((t,i) => {
+            if(action.index === i){
+              return {transcript_part: action.txt}
+            } else {
+              return t;
+            }
+          })
+        };
     case actions.SET_ERROR_MSG:
       return {...state, error_msg: action.err};
     case actions.UPDATE_STATUS:
       return {...state, status: action.status};
+    case actions.SET_ACTIVE_TRANSCRIPT:
+      return {...state, active_transcript: action.index}
     default:
       return state
   }

@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 
 
 class RecordPanel extends Component {
-  state = {'status': 'INIT'};
 
   constructor(props) {
     super(props);
@@ -18,7 +17,7 @@ class RecordPanel extends Component {
         <div className="RecordPanel">
           RECORDING PANEL status: {this.props.transcripts.status}
         </div>
-        <div>
+        <div className="RecordButtons">
           <RecordStart state={this.props}/>
           <RecordStop state={this.props}/>
         </div>
@@ -54,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateTxt: (txt) => { dispatch(actions.updateTxt(txt)) },
+  createTranscript: (txt) => { dispatch(actions.createTranscript(txt)) },
   startRecording: () => {dispatch(actions.startRecording())},
   getAudioTranscript: () => { dispatch(actions.getAudioTranscript())}
 });

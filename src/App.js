@@ -8,18 +8,13 @@ import './App.css';
 
 class App extends Component {
 
-  state = {'status': 'INIT'};
 
   render() {
     return (
       <Provider store={store}>
-        <div>
         <div className="App">
-          {this.state.status}
-        </div>
-        <RecordPanel state={this.props}/>
-        <ResultPanel state={this.props}/>
-        //<RecordingFromServer/>
+          <RecordPanel state={this.props} className="RecordPanel"/>
+          <ResultPanel state={this.props} className="ResultPanel"/>
         </div>
       </Provider>
     );

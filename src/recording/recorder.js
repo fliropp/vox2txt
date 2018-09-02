@@ -65,7 +65,7 @@ const recorder = {
             resolve(trscpt.data);
           });
         } else {
-          reject('no tro lo lo lo fo yo');
+          reject('no resonse from Google S2T (this one needs a timeout/fallback)');
         }
       });
     },
