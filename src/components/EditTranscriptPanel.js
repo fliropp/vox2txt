@@ -11,16 +11,16 @@ class EditTranscriptPanel extends Component {
     super(props);
   }
 
-  saveEdit() {
-    const txt = document.getElementsByClassName('edit_transcript_txt')[0].getAttribute('value');
-    this.props.updateTranscript(txt, this.props.state.active_transcript)
+  saveEdit(update) {
+    const txt = document.getElementsByClassName('transcriptsEditTxt')[0].getAttribute('value');
+    this.props.updateTranscript(update.target.value, this.props.state.transcripts.active_transcript)
   }
 
   render() {
     return (
-      <div className="transcripts_edit">
+      <div className="transcriptEdit">
         <form>
-          <input type="texarea" className="edit_transcript_txt" onChange={() => this.saveEdit()}value={
+          <input type="texarea" className="transcriptsEditTxt" onChange={this.saveEdit.bind(this)} value={
             this.props.state.transcripts.transcript[this.props.state.transcripts.active_transcript] !== undefined ?
             this.props.state.transcripts.transcript[this.props.state.transcripts.active_transcript].transcript_part :
             '...'

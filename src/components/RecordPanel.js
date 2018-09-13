@@ -14,7 +14,7 @@ class RecordPanel extends Component {
   render() {
     return (
       <div>
-        <div className="RecordPanel">
+        <div className='RecordHeader'>
           RECORDING PANEL status: {this.props.transcripts.status}
         </div>
         <div className="RecordButtons">
@@ -31,7 +31,7 @@ class RecordStart extends React.Component {
 
   render() {
     return (
-        <button style={buttonStyle} onClick={this.props.state.startRecording}>record</button>
+        <button className='recStart' onClick={this.props.state.startRecording}>record</button>
     );
   }
 }
@@ -39,7 +39,7 @@ class RecordStart extends React.Component {
 class RecordStop extends React.Component {
   render() {
     return (
-        <button style={buttonStyle} onClick={this.props.state.getAudioTranscript}>stop</button>
+        <button className='recStop' onClick={this.props.state.getAudioTranscript}>stop</button>
     );
   }
 }

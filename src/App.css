@@ -1,32 +1,77 @@
-.App {
+.App{
   text-align: left;
-  background-color: #000067;
-  color: #AADD89;
+  background-color: #BBB6B5;
+  color: #161616;
   font-family: 'Courier';
+  display:flex;
+  flex-direction: column;
 }
 
 .RecordPanel {
   text-align: center;
-  background-color: #000056;
-  color: #AADD89;
+  background-color: #9D9998;
+  color: #161616;
 }
 
 .RecordButtons {
-  background-color: #000042;
+  margin: 10px 20px 10px 20px;
+  background-color: #9D9998;
   color: #FFF456;
+  display:flex;
+  flex-direction:column;
+  width: 60px;
 }
 
-.transcript_part {
+.recStart {
+  width: 35px;
+	height: 35px;
+	font-size: 0;
+	background-color: red;
+	border: 0;
+	border-radius: 35px;
+	margin: 18px;
+	outline: none;
+}
+
+.TranscriptPanel {
+  display:flex;
+  flex-direction:row;
+}
+
+.transcripts {
+  margin: 5px 20px 5px 20px;
+  background-color: #CFC8C8;
+  width:40%;
+  display:flex;
+  flex-direction: column;
+}
+
+.transcriptPart {
+  margin: 10px 30px 10px 30px;
   padding: 10px 30px 10px 30px;
   border-style:solid;
   border-width: 1px 1px 0px 1px;
   border-color: #0F0F0F;
-  background-color: #FAFFFA;
+  border-radius: 25px;
+  background-color: #F7F5F5;
   color:#0F0F0F;
   font-family: 'Arial';
   font-size: 12px;
 }
 
-.transcript_part.edit {
+.transcriptPart.edit {
   display:none;
+}
+
+.transcriptEdit {
+  margin: 20px 20px 10px 20px;
+  background-color: #CFC8C8;
+  width:40%;
+}
+
+.transcriptsEditTxt {
+  margin: 30px 30px 30px 30px;
+  border-radius: 25px;
+  width:400px;
+  height:70px;
 }

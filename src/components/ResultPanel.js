@@ -40,15 +40,13 @@ class ResultPanel extends Component {
     this.props.updateTranscript(txt, index);
   }
 
-
-
   render() {
     return (
-      <div className="transcripts_panel">
+      <div className="TranscriptPanel">
       <div className="transcripts">
         {this.props.transcripts.transcript.map((t, i) => {
           return (
-           <div className="transcript_part" id={i} onClick={() => this.setActive(i)}>{t.transcript_part}</div>
+           <div className="transcriptPart" id={i} onClick={() => this.setActive(i)}>{t.transcript_part}</div>
          )
         })}
       </div>
