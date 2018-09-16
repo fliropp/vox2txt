@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/txtAction.js';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 
@@ -9,14 +11,26 @@ class EditTranscriptPanel extends Component {
 
   constructor(props) {
     super(props);
+    this.saveEdit = this.saveEdit.bind(this)
   }
 
+
   saveEdit(update) {
-    const txt = document.getElementsByClassName('transcriptsEditTxt')[0].getAttribute('value');
-    this.props.updateTranscript(update.target.value, this.props.state.transcripts.active_transcript)
+    this.props.updateTranscript(update, this.props.transcripts.active_transcript)
   }
 
   render() {
+    return (
+      <ReactQuill
+      value={this.props.transcripts.transcript[this.props.transcripts.active_transcript] !== undefined ?
+             this.props.transcripts.transcript[this.props.transcripts.active_transcript].transcript_part :
+             '.......'
+      }
+      onChange={this.saveEdit}  />
+    )
+  }
+
+  /*render() {
     return (
       <div className="transcriptEdit">
         <form>
@@ -29,7 +43,7 @@ class EditTranscriptPanel extends Component {
         </form>
       </div>
     );
-  }
+  }*/
 }
 
 const buttonStyle = {

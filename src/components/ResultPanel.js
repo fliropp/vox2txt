@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import EditTranscriptPanel from './EditTranscriptPanel.js'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/txtAction.js';
@@ -50,7 +49,6 @@ class ResultPanel extends Component {
          )
         })}
       </div>
-      <EditTranscriptPanel state={this.props}/>
       </div>
     );
   }
