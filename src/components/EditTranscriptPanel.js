@@ -22,6 +22,7 @@ class EditTranscriptPanel extends Component {
   render() {
     return (
       <ReactQuill
+      className='editor'
       value={this.props.transcripts.transcript[this.props.transcripts.active_transcript] !== undefined ?
              this.props.transcripts.transcript[this.props.transcripts.active_transcript].transcript_part :
              '.......'

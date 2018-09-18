@@ -19,7 +19,6 @@ class RecordPanel extends Component {
         </div>
         <div className="RecordButtons">
           <RecordStart state={this.props}/>
-          <RecordStop state={this.props}/>
         </div>
       </div>
     );
@@ -28,18 +27,22 @@ class RecordPanel extends Component {
 
 
 class RecordStart extends React.Component {
-
-  render() {
-    return (
-        <button className='recStart' onClick={this.props.state.startRecording}>record</button>
-    );
+  toggleRecording() {
+    switch(this.props.state.transcripts.status) {
+      case 'READY':
+        this.props.state.startRecording();
+        break;
+      case 'RECORDING':
+        this.props.state.getAudioTranscript();
+        break;
+      default:
+        break;
+    }
   }
-}
-
-class RecordStop extends React.Component {
   render() {
+    let classAttribute = 'recStart ' + this.props.state.transcripts.status;
     return (
-        <button className='recStop' onClick={this.props.state.getAudioTranscript}>stop</button>
+        <button className={classAttribute} onClick={() => this.toggleRecording()}>record</button>
     );
   }
 }

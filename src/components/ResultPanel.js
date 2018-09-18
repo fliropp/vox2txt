@@ -45,7 +45,7 @@ class ResultPanel extends Component {
       <div className="transcripts">
         {this.props.transcripts.transcript.map((t, i) => {
           return (
-           <div className="transcriptPart" id={i} onClick={() => this.setActive(i)}>{t.transcript_part}</div>
+           <div className="transcriptPart" id={i} onClick={() => this.setActive(i)} dangerouslySetInnerHTML={{__html:t.transcript_part}}></div>
          )
         })}
       </div>
