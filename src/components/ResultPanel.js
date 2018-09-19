@@ -12,16 +12,6 @@ class ResultPanel extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.createTranscript('...these are the results from the googalian jury...');
-    this.props.createTranscript('...entry 1');
-    this.props.createTranscript('...entry 2');
-    this.props.createTranscript('...entry 3');
-    this.props.createTranscript('...entry 4');
-
-
-  }
-
   setActive(i) {
     if (document.getElementById(i) !== null) {
       const previous = document.getElementsByClassName('edit');

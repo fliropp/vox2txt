@@ -39,7 +39,7 @@ export const getAudioTranscript = () => {
             dispatch(updateStatus('TRANSCRIPT_IN_PROGRESS'));
             recorder.stop()
             .then(r => {
-              dispatch(createTranscript('received transcript: ' + r));
+              dispatch(createTranscript(r));
               dispatch(updateStatus('TRANSCRIPT_COMPLETE'))
             });
     };

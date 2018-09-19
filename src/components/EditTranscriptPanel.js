@@ -30,21 +30,6 @@ class EditTranscriptPanel extends Component {
       onChange={this.saveEdit}  />
     )
   }
-
-  /*render() {
-    return (
-      <div className="transcriptEdit">
-        <form>
-          <input type="texarea" className="transcriptsEditTxt" onChange={this.saveEdit.bind(this)} value={
-            this.props.state.transcripts.transcript[this.props.state.transcripts.active_transcript] !== undefined ?
-            this.props.state.transcripts.transcript[this.props.state.transcripts.active_transcript].transcript_part :
-            '...'
-          }>
-          </input>
-        </form>
-      </div>
-    );
-  }*/
 }
 
 const buttonStyle = {
