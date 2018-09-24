@@ -7,7 +7,7 @@ const audioReadyEvent = new CustomEvent('transcriptReady');
 let mediaRecorder;
 
 const recorder = {
-    start: () => {
+    start: (config) => {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         console.log('getUserMedia supported.');
         navigator.mediaDevices.getUserMedia({audio: true})
@@ -35,7 +35,7 @@ const recorder = {
               arrayBufferToAudioBuffer(arrayBuffer)
               .then((audioBuffer) => {
                 wav = audioBufferToWav(audioBuffer);
-                socket.sendAudio(wav, (res) => {
+                socket.sendAudio(wav, config, (res) => {
                   audioReadyEvent.data = res;
                   window.dispatchEvent(audioReadyEvent);
                   return res;

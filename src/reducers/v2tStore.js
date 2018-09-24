@@ -8,6 +8,7 @@ const getInitState = () => {
     error_msg:'',
     status: 'READY',
     active_transcript: 0,
+    language_code: 'en-US',
   }
 }
 
@@ -31,6 +32,8 @@ const v2tStore = (state = getInitState(), action) => {
       return {...state, status: action.status};
     case actions.SET_ACTIVE_TRANSCRIPT:
       return {...state, active_transcript: action.index}
+    case actions.SET_LANGUAGE_CODE:
+      return {...state, language_code: action.code}
     default:
       return state
   }

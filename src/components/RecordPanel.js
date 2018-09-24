@@ -14,7 +14,7 @@ const codes = [
     {label:'Deutsch', value:'de-DE'},
     {label:'Finnish', value:'fi-FI'},
 ]
-const defaultOption = codes[3];
+const languageCode = 'en-US';
 
 
 class RecordPanel extends Component {
@@ -43,13 +43,13 @@ class RecordStart extends React.Component {
   toggleRecording() {
     switch(this.props.state.transcripts.status) {
       case 'READY':
-        this.props.state.startRecording();
+        this.props.state.startRecording(this.props.state.transcripts.language_code);
         break;
       case 'RECORDING':
         this.props.state.getAudioTranscript();
         break;
       case 'TRANSCRIPT_COMPLETE':
-        this.props.state.startRecording();
+        this.props.state.startRecording(this.props.state.transcripts.language_code);
         break;
       default:
         break;
@@ -71,7 +71,7 @@ class LanguagePicker extends React.Component {
   }
 
   _onSelect (option) {
-   console.log('You selected ', option.label, ' with value ', option.value)
+   this.props.state.setLanguageCode(option.value);
  }
 
   render() {
@@ -91,8 +91,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   createTranscript: (txt) => { dispatch(actions.createTranscript(txt)) },
-  startRecording: () => {dispatch(actions.startRecording())},
-  getAudioTranscript: () => { dispatch(actions.getAudioTranscript())}
+  startRecording: (config) => {dispatch(actions.startRecording(config))},
+  getAudioTranscript: () => { dispatch(actions.getAudioTranscript())},
+  setLanguageCode: (code) => {dispatch(actions.setLanguageCode(code))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecordPanel);

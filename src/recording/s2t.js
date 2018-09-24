@@ -12,7 +12,7 @@ const client = new speech.SpeechClient();
 // Reads a local audio file and converts it to base64
 //const file = fs.readFileSync(fileName);
 module.exports = {
-  convert: async (input) => {
+  convert: async (input, lang) => {
     return new Promise((resolve, reject) => {
       const audio = {
         content: input,
@@ -20,7 +20,8 @@ module.exports = {
       const config = {
         encoding: 'WAV',
         sampleRateHertz: 44100,
-        languageCode: 'en-US',
+        languageCode: lang,
+        phrases: ['format heading one', 'format heading two', 'format heading three', 'format heading four', 'format bold', 'format italics'],
       };
       const request = {
         audio: audio,

@@ -1,8 +1,8 @@
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:8000');
 
-const sendAudio = (wav, cb) => {
-  socket.emit('s2t-request', wav);
+const sendAudio = (wav, config, cb) => {
+  socket.emit('s2t-request', wav, config);
   socket.on('s2t-response', txt => {
     //const result = document.querySelector('.current_transcript_part');
     //result.innerHTML = txt;
